@@ -21,7 +21,12 @@ public class DoorBeh : MonoBehaviour
         if (!isOpen && doorAnimator != null)
         {
             isOpen = true;
+
+
+            this.gameObject.GetComponent<MeshCollider>().enabled = false;
+
             doorAnimator.SetBool("isOpen", true);
+            doorAnimator.SetBool("character_nearby", true);
         }
     }
 
@@ -43,4 +48,21 @@ public class DoorBeh : MonoBehaviour
         else
             OpenDoor();
     }
+
+
+
+    //need something like, when i hit the door
+
+    private void OnCollisionEnter(Collision other)
+    {
+
+        if (other.gameObject.tag == "Player")
+        {
+            ToggleDoor();
+
+
+        }
+
+    }
+
 }
